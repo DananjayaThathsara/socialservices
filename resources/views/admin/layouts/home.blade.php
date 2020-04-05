@@ -1,4 +1,5 @@
-@extends('admin.app');
+@extends('admin.app')
+@section('dashboard-main-li','menu-open')
 @section('content')
 <!-- Content Header (Page header) -->
 <div class="content-header">

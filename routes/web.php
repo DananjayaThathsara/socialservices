@@ -17,12 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace'=>'front'],function (){
 
     Route::resource('/','serviceController');
+
     Route::get('get-city-list','serviceController@getCityList');
     Route::get('search','serviceController@search');
     Route::get('category/{id}','serviceController@categoryShow')->name('category');
 });
 Route::group(['namespace'=>'admin'],function (){
     Route::resource('/admin/home', 'HomeController');
+    Route::resource('/adminCategory','categoryController');
+    Route::resource('/adminService','serviceController');
     // Admin Auth Routes
     Route::get('admin-login', 'Auth\LoginController@showLoginForm')->name('admin.login.form');
     Route::post('admin-login', 'Auth\LoginController@login')->name('login');

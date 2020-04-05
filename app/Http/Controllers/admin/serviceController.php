@@ -5,22 +5,20 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class serviceController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     *
      */
     public function __construct()
     {
         $this->middleware('auth:admin');
     }
-
     public function index()
     {
-        return view('admin.layouts.category.all');
+        return view('admin.layouts.service.all');
     }
 
     /**
@@ -30,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.layouts.category.add');
+        return view('admin.layouts.service.add');
     }
 
     /**
