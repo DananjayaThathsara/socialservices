@@ -1,11 +1,9 @@
 @extends('front.app')
 
 @section('content')
-
     <div class="row" id="home">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <a href="{{ route('index') }}" class="btn btn-warning" style="margin-top: 5px;cursor: pointer">Go Back</a>
-
             <br><br>
             <h3 class="display-6"><b>Filter By</b></h3>
             <form action="{{url('search')}}" method="GET">
@@ -39,7 +37,6 @@
                             {{$category->cat_name}}
                             <span class="badge badge-primary badge-pill">{{$category->services->count()}}</span>
                         </li></a>
-
                 @empty
                     <div class="alert alert-danger alert-block">
                         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -48,40 +45,39 @@
                 @endforelse
 
             </ul>
+            <br><br>     <br><br>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <br><br>
-            <h2 class="display-6"><b>Government Providers</b></h2>
+            <h2 class="display-6"><b>  <i class="fa fa-truck"></i>  Government Providers</b></h2>
             @forelse($governments as $government)
                 <div class="row" style="border: 1px #ccc solid;padding: 10px;border-radius: 5px;margin-bottom: 10px">
-                    <div class="col-md-4"><img src="{{asset('image/default.png')}}" alt=""></div>
-                    <div class="col-md-8">
-                        <h4 style="text-align:left">{{$government->name}}</h4>
-                        <h6>Service :{{$government->category->cat_name}}</h6>
-                        <h6>Location :{{$government->city->c_name}}</h6>
-                        <h6>Phone :{{$government->phone}}</h6>
+                    <div class="col-md-4 col-sm-4"><img src="{{asset('image').'/'.$government->category->image}}" alt="" width="150" height="150"></div>
+                    <div class="col-md-8 col-sm-8">
+                        <h5 style="text-align:left;font-weight:bold">{{$government->name}}</h5>
+                        <h6><b>Service :</b>{{$government->category->cat_name}}</h6>
+                        <h6><b>Location :</b>{{$government->city->district->d_name.' - '.$government->city->c_name }}</h6>
+                        <h6><b>Phone :</b>{{$government->phone}}</h6>
                     </div>
                 </div>
             @empty
                 <div class="alert alert-danger alert-block">
-
                     <strong>No Services ...</strong>
                 </div>
             @endforelse
-            <h2 class="display-6" style="margin-top: 30px"><b>Private Providers</b></h2>
+            <h2 class="display-6" style="margin-top: 30px">  <i class="fa fa-truck"></i>  <b>Private Providers</b></h2>
             @forelse($privates as $private)
                 <div class="row" style="border: 1px #ccc solid;padding: 10px;border-radius: 5px;margin-bottom: 10px">
-                    <div class="col-md-4"><img src="{{asset('image/default.png')}}" alt=""></div>
-                    <div class="col-md-8">
-                        <h4 style="text-align:left">{{$private->name}}</h4>
-                        <h6>Service :{{$private->category->cat_name}}</h6>
-                        <h6>Location :{{$private->city->c_name}}</h6>
-                        <h6>Phone :{{$private->phone}}</h6>
+                    <div class="col-md-4 col-sm-4"><img src="{{asset('image').'/'.$private->category->image}}" alt="" width="150" height="150"></div>
+                    <div class="col-md-8 col-sm-8">
+                        <h5 style="text-align:left;font-weight: bold">{{$private->name}}</h5>
+                        <h6><b>Service :</b>{{$private->category->cat_name}}</h6>
+                        <h6><b>Location :</b>{{$private->city->district->d_name.' - '.$private->city->c_name }}</h6>
+                        <h6><b>Phone :</b>{{$private->phone}}</h6>
                     </div>
                 </div>
             @empty
                 <div class="alert alert-danger alert-block">
-
                     <strong>No Services..</strong>
                 </div>
             @endforelse

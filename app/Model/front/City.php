@@ -10,4 +10,10 @@ class City extends Model
     {
         return $this->hasMany(service::class,'id');
     }
+
+    public function district(){
+
+        return $this->belongsTo(District::class,'d_id');
+    }
+
 }

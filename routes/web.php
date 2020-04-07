@@ -26,6 +26,8 @@ Route::group(['namespace'=>'admin'],function (){
     Route::resource('/admin/home', 'HomeController');
     Route::resource('/adminCategory','categoryController');
     Route::resource('/adminService','serviceController');
+    Route::post('/adminService/approve/{id}','serviceController@approve')->name('adminService.approve');
+    Route::post('/adminService/reject/{id}','serviceController@reject')->name('adminService.reject');
     // Admin Auth Routes
     Route::get('admin-login', 'Auth\LoginController@showLoginForm')->name('admin.login.form');
     Route::post('admin-login', 'Auth\LoginController@login')->name('login');

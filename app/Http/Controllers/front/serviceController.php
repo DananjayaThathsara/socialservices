@@ -19,8 +19,8 @@ class serviceController extends Controller
     public function index()
     {
 
-        $governments = Service::with('city', 'category')->where([['provider_type', '=', 'government'], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate(5);
-        $privates = Service::with('city', 'category')->where([['provider_type', '=', 'private'], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate(5);
+        $governments = Service::with('city', 'category','district')->where([['provider_type', '=', 'government'], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate(5);
+        $privates = Service::with('city', 'category','district')->where([['provider_type', '=', 'private'], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate(5);
         return view('front.layouts.home', compact('governments', 'privates'));
     }
 
@@ -38,28 +38,28 @@ class serviceController extends Controller
 
         if (isset($request->city)&&$request->category==null) {
 
-            $governments = Service::with('city', 'category')->where([['provider_type', '=', 'government'], ['c_id', '=', $request->city], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
+            $governments = Service::with('city', 'category','district')->where([['provider_type', '=', 'government'], ['c_id', '=', $request->city], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
 
-            $privates = Service::with('city', 'category')->where([['provider_type', '=', 'private'], ['c_id', '=', $request->city], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
+            $privates = Service::with('city', 'category','district')->where([['provider_type', '=', 'private'], ['c_id', '=', $request->city], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
         } elseif (isset($request->category)&&$request->city==null) {
 
-            $governments = Service::with('city', 'category')->where([['provider_type', '=', 'government'], ['cat_id', '=', $request->category], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
-            $privates = Service::with('city', 'category')->where([['provider_type', '=', 'private'], ['cat_id', '=', $request->category], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
+            $governments = Service::with('city', 'category','district')->where([['provider_type', '=', 'government'], ['cat_id', '=', $request->category], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
+            $privates = Service::with('city', 'category','district')->where([['provider_type', '=', 'private'], ['cat_id', '=', $request->category], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
         } elseif ($request->city!=null && $request->category!=null) {
 
-            $governments = Service::with('city', 'category')->where([['provider_type', '=', 'government'], ['cat_id', '=', $request->category], ['c_id', '=', $request->city], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
-            $privates = Service::with('city', 'category')->where([['provider_type', '=', 'private'], ['cat_id', '=', $request->category], ['c_id', '=', $request->city], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
+            $governments = Service::with('city', 'category','district')->where([['provider_type', '=', 'government'], ['cat_id', '=', $request->category], ['c_id', '=', $request->city], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
+            $privates = Service::with('city', 'category','district')->where([['provider_type', '=', 'private'], ['cat_id', '=', $request->category], ['c_id', '=', $request->city], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
         } elseif (!isset($request->city) || !isset($request->category)) {
-            $governments = Service::with('city', 'category')->where([['provider_type', '=', 'government'], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate(5);
-            $privates = Service::with('city', 'category')->where([['provider_type', '=', 'private'], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate(5);
+            $governments = Service::with('city', 'category','district')->where([['provider_type', '=', 'government'], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate(5);
+            $privates = Service::with('city', 'category','district')->where([['provider_type', '=', 'private'], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate(5);
         }
         return view('front.layouts.search', compact('governments', 'privates'));
 
     }
     public function categoryShow($id){
 
-        $governments = Service::with('city', 'category')->where([['provider_type', '=', 'government'], ['cat_id', '=', $id], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
-        $privates = Service::with('city', 'category')->where([['provider_type', '=', 'private'], ['cat_id', '=', $id], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
+        $governments = Service::with('city', 'category','district')->where([['provider_type', '=', 'government'], ['cat_id', '=', $id], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
+        $privates = Service::with('city', 'category','district')->where([['provider_type', '=', 'private'], ['cat_id', '=', $id], ['status', '=', 'approved']])->orderBy('created_at', 'desc')->paginate('5');
         $catname=Category::find($id);
         return view('front.layouts.category', compact('governments', 'privates','catname'));
     }

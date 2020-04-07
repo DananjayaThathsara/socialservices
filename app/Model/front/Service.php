@@ -15,4 +15,8 @@ class service extends Model
     {
         return $this->belongsTo(Category::class, 'cat_id');
     }
+    public function district(){
+
+        return $this->belongsTo(District::class,'id');
+    }
 }
